@@ -621,6 +621,26 @@
     [
       "3828f233-e3a1-487e-aef3-a50483b5f068",
       "optic_uart1"
+    ],
+    [
+      "27a704ae-07c1-43be-a96c-251e29151b16",
+      "optic_uart2"
+    ],
+    [
+      "a8677470-4d1f-4af7-8e5f-2a85d2d2960c",
+      "optic_uart3"
+    ],
+    [
+      "c1b1d056-b994-4087-9ef9-9068ffddd870",
+      "optic_uart4"
+    ],
+    [
+      "2272d0a2-060e-4fcc-bcfb-c96991990d43",
+      "optic_uart5"
+    ],
+    [
+      "9eedc840-40dc-4b49-a4ae-4df3dd48f414",
+      "optic_uart6"
     ]
   ],
   "text_variables": {}
