@@ -544,7 +544,7 @@
 		(property ki_fp_filters "SOT?23?5*")
 		(path "/b6164c4a-c229-47ee-a555-b832360c38de")
 		(sheetname "Root")
-		(sheetfile "optapi.kicad_sch")
+		(sheetfile "optopi.kicad_sch")
 		(attr smd)
 		(fp_line
 			(start 0 1.56)
@@ -840,7 +840,7 @@
 		(property ki_fp_filters "R_*")
 		(path "/1bd085ab-3257-4eb4-b814-20d1367edfd5")
 		(sheetname "Root")
-		(sheetfile "optapi.kicad_sch")
+		(sheetfile "optopi.kicad_sch")
 		(attr smd)
 		(fp_line
 			(start -0.153641 -0.38)
@@ -1824,7 +1824,7 @@
 		(property ki_fp_filters "SOT?666*")
 		(path "/4fbb634a-bbbc-43a0-8c6c-fefeab58414c")
 		(sheetname "Root")
-		(sheetfile "optapi.kicad_sch")
+		(sheetfile "optopi.kicad_sch")
 		(attr smd)
 		(fp_line
 			(start -0.8 0.9)
@@ -2354,7 +2354,7 @@
 		(property ki_fp_filters "C_*")
 		(path "/7bc5df8a-9967-43de-8469-c8d16b40135f")
 		(sheetname "Root")
-		(sheetfile "optapi.kicad_sch")
+		(sheetfile "optopi.kicad_sch")
 		(attr smd)
 		(fp_line
 			(start -0.107836 0.36)
@@ -3386,7 +3386,7 @@
 		(property ki_fp_filters "USB*")
 		(path "/e5989ee8-65c1-45a2-9deb-05c5a1b144ef")
 		(sheetname "Root")
-		(sheetfile "optapi.kicad_sch")
+		(sheetfile "optopi.kicad_sch")
 		(attr smd)
 		(fp_line
 			(start 3.845 -1.16)
@@ -3846,7 +3846,7 @@
 		(property ki_fp_filters "C_*")
 		(path "/54b28649-9acb-4316-ac69-b950140a915d")
 		(sheetname "Root")
-		(sheetfile "optapi.kicad_sch")
+		(sheetfile "optopi.kicad_sch")
 		(attr smd)
 		(fp_line
 			(start -0.107836 0.36)
@@ -4080,7 +4080,7 @@
 		(property ki_fp_filters "QFN*1EP*7x7mm?P0.4mm*")
 		(path "/b841930c-d1c0-42f1-84eb-8a1a2ed590f0")
 		(sheetname "Root")
-		(sheetfile "optapi.kicad_sch")
+		(sheetfile "optopi.kicad_sch")
 		(attr smd)
 		(fp_line
 			(start -3.61 3.61)
@@ -5470,7 +5470,7 @@
 		(property ki_fp_filters "Connector*:*_1x??_*")
 		(path "/9cae7432-d266-4521-8d12-c83573da8701")
 		(sheetname "Root")
-		(sheetfile "optapi.kicad_sch")
+		(sheetfile "optopi.kicad_sch")
 		(attr through_hole)
 		(fp_line
 			(start -1.33 8.95)
@@ -5804,7 +5804,7 @@
 		(property ki_fp_filters "R_*")
 		(path "/ffc85b2c-69be-47a4-945a-d633f11f2c38")
 		(sheetname "Root")
-		(sheetfile "optapi.kicad_sch")
+		(sheetfile "optopi.kicad_sch")
 		(attr smd)
 		(fp_line
 			(start -0.153641 0.38)
@@ -6555,7 +6555,7 @@
 		(property ki_fp_filters "C_*")
 		(path "/eda2d1fd-decd-4676-96a6-fe52036ced44")
 		(sheetname "Root")
-		(sheetfile "optapi.kicad_sch")
+		(sheetfile "optopi.kicad_sch")
 		(attr smd)
 		(fp_line
 			(start -0.107836 -0.36)
@@ -7067,7 +7067,7 @@
 		(property ki_fp_filters "Connector*:*_1x??_*")
 		(path "/eaa0f143-633b-45cc-a358-c59925f32042")
 		(sheetname "Root")
-		(sheetfile "optapi.kicad_sch")
+		(sheetfile "optopi.kicad_sch")
 		(attr through_hole)
 		(fp_line
 			(start -1.33 -1.33)
@@ -7367,7 +7367,7 @@
 		(property ki_fp_filters "R_*")
 		(path "/3f5dc7a6-99e1-4dc4-bcd9-2a1a018f97d7")
 		(sheetname "Root")
-		(sheetfile "optapi.kicad_sch")
+		(sheetfile "optopi.kicad_sch")
 		(attr smd)
 		(fp_line
 			(start -0.153641 -0.38)
@@ -7853,7 +7853,7 @@
 		(property ki_fp_filters "C_*")
 		(path "/8c5f49ed-115c-419e-8d5d-da0140d0f3ad")
 		(sheetname "Root")
-		(sheetfile "optapi.kicad_sch")
+		(sheetfile "optopi.kicad_sch")
 		(attr smd)
 		(fp_line
 			(start -0.261252 0.735)
@@ -8369,7 +8369,7 @@
 		(property ki_fp_filters "Connector*:*_2x??_*")
 		(path "/b507af10-1efe-4a43-b0b5-dd9a664e8dcc")
 		(sheetname "Root")
-		(sheetfile "optapi.kicad_sch")
+		(sheetfile "optopi.kicad_sch")
 		(attr through_hole)
 		(fp_line
 			(start 3.87 -1.33)
@@ -9312,7 +9312,7 @@
 		(property ki_fp_filters "C_*")
 		(path "/597555ef-42d3-440a-974e-8650da3be551")
 		(sheetname "Root")
-		(sheetfile "optapi.kicad_sch")
+		(sheetfile "optopi.kicad_sch")
 		(attr smd)
 		(fp_line
 			(start -0.107836 -0.36)
@@ -10567,7 +10567,7 @@
 		(property ki_fp_filters "R_*")
 		(path "/dc1f66d2-c803-4225-86e2-695019e086d1")
 		(sheetname "Root")
-		(sheetfile "optapi.kicad_sch")
+		(sheetfile "optopi.kicad_sch")
 		(attr smd)
 		(fp_line
 			(start -0.153641 -0.38)
@@ -10801,7 +10801,7 @@
 		(property ki_fp_filters "C_*")
 		(path "/86577c8c-7357-49c3-b8f4-a1df03532cda")
 		(sheetname "Root")
-		(sheetfile "optapi.kicad_sch")
+		(sheetfile "optopi.kicad_sch")
 		(attr smd)
 		(fp_line
 			(start -0.107836 -0.36)
@@ -11035,7 +11035,7 @@
 		(property ki_fp_filters "C_*")
 		(path "/749b042f-3881-415d-a10a-cabab22dad3e")
 		(sheetname "Root")
-		(sheetfile "optapi.kicad_sch")
+		(sheetfile "optopi.kicad_sch")
 		(attr smd)
 		(fp_line
 			(start -0.107836 -0.36)
@@ -11269,7 +11269,7 @@
 		(property ki_fp_filters "R_*")
 		(path "/ec5de714-9242-4b43-9a75-c4b1b35c90f8")
 		(sheetname "Root")
-		(sheetfile "optapi.kicad_sch")
+		(sheetfile "optopi.kicad_sch")
 		(attr smd)
 		(fp_line
 			(start -0.153641 -0.38)
@@ -11503,7 +11503,7 @@
 		(property ki_fp_filters "C_*")
 		(path "/90c0dcf6-9c67-4938-821d-0dbd10eaf394")
 		(sheetname "Root")
-		(sheetfile "optapi.kicad_sch")
+		(sheetfile "optopi.kicad_sch")
 		(attr smd)
 		(fp_line
 			(start -0.107836 0.36)
@@ -11713,7 +11713,7 @@
 		(property ki_fp_filters "MountingHole*Pad*")
 		(path "/c2235ed5-5c63-43da-9716-044fd70273b8")
 		(sheetname "Root")
-		(sheetfile "optapi.kicad_sch")
+		(sheetfile "optopi.kicad_sch")
 		(attr exclude_from_pos_files)
 		(fp_circle
 			(center 0 0)
@@ -11827,7 +11827,7 @@
 		(property ki_fp_filters "MountingHole*Pad*")
 		(path "/555e344f-d5af-4112-bd81-9c3f5719f726")
 		(sheetname "Root")
-		(sheetfile "optapi.kicad_sch")
+		(sheetfile "optopi.kicad_sch")
 		(attr exclude_from_pos_files)
 		(fp_circle
 			(center 0 0)
@@ -12247,7 +12247,7 @@
 		(property ki_fp_filters "Connector*:*_1x??_*")
 		(path "/726eda89-d89f-43b4-8a4e-4716f934a96c")
 		(sheetname "Root")
-		(sheetfile "optapi.kicad_sch")
+		(sheetfile "optopi.kicad_sch")
 		(attr through_hole)
 		(fp_line
 			(start 1.33 1.270001)
@@ -12557,7 +12557,7 @@
 		(property ki_fp_filters "R_*")
 		(path "/83ad62ad-4aa8-4a2e-b220-fdf4940a4f01")
 		(sheetname "Root")
-		(sheetfile "optapi.kicad_sch")
+		(sheetfile "optopi.kicad_sch")
 		(attr smd)
 		(fp_line
 			(start -0.153641 -0.38)
@@ -12767,7 +12767,7 @@
 		(property ki_fp_filters "MountingHole*Pad*")
 		(path "/53692121-3666-41ee-ba65-c4528828e58a")
 		(sheetname "Root")
-		(sheetfile "optapi.kicad_sch")
+		(sheetfile "optopi.kicad_sch")
 		(attr exclude_from_pos_files)
 		(fp_circle
 			(center 0 0)
@@ -13424,7 +13424,7 @@
 		(property ki_fp_filters "SOIC*5.23x5.23mm*P1.27mm*")
 		(path "/62bb970a-9512-43a7-88a7-27baeb48c90d")
 		(sheetname "Root")
-		(sheetfile "optapi.kicad_sch")
+		(sheetfile "optopi.kicad_sch")
 		(attr smd)
 		(fp_line
 			(start -2.725 -2.725)
@@ -14052,7 +14052,7 @@
 		(property ki_fp_filters "Crystal*")
 		(path "/4f0ff2c7-00a2-4720-899b-1482ff1c7b32")
 		(sheetname "Root")
-		(sheetfile "optapi.kicad_sch")
+		(sheetfile "optopi.kicad_sch")
 		(attr smd)
 		(fp_line
 			(start -2 -1.65)
@@ -14315,7 +14315,7 @@
 		(property ki_fp_filters "R_*")
 		(path "/50d71f28-00ba-45da-902c-0e130f5f91c3")
 		(sheetname "Root")
-		(sheetfile "optapi.kicad_sch")
+		(sheetfile "optopi.kicad_sch")
 		(attr smd)
 		(fp_line
 			(start -0.153641 -0.38)
@@ -14549,7 +14549,7 @@
 		(property ki_fp_filters "C_*")
 		(path "/1b8aa75c-7c5c-4360-96f0-470ba6a2ab20")
 		(sheetname "Root")
-		(sheetfile "optapi.kicad_sch")
+		(sheetfile "optopi.kicad_sch")
 		(attr smd)
 		(fp_line
 			(start -0.261252 0.735)
@@ -15050,7 +15050,7 @@
 		(property ki_fp_filters "C_*")
 		(path "/50e9a86f-6e07-451f-803f-71282cda3714")
 		(sheetname "Root")
-		(sheetfile "optapi.kicad_sch")
+		(sheetfile "optopi.kicad_sch")
 		(attr smd)
 		(fp_line
 			(start -0.107836 0.36)
@@ -15777,7 +15777,7 @@
 		(property ki_fp_filters "MountingHole*Pad*")
 		(path "/35ffe1ff-16ce-45ff-9316-32bf450e29db")
 		(sheetname "Root")
-		(sheetfile "optapi.kicad_sch")
+		(sheetfile "optopi.kicad_sch")
 		(attr exclude_from_pos_files)
 		(fp_circle
 			(center 0 0)
@@ -16436,7 +16436,7 @@
 		(property ki_fp_filters "C_*")
 		(path "/74fec5d7-b52d-4650-aef5-7b68f711bce4")
 		(sheetname "Root")
-		(sheetfile "optapi.kicad_sch")
+		(sheetfile "optopi.kicad_sch")
 		(attr smd)
 		(fp_line
 			(start -0.107836 0.36)
@@ -16675,7 +16675,7 @@
 		(property ki_fp_filters "C_*")
 		(path "/bf5bf3a7-8b56-4e8e-a8f2-81fd39d04f0b")
 		(sheetname "Root")
-		(sheetfile "optapi.kicad_sch")
+		(sheetfile "optopi.kicad_sch")
 		(attr smd)
 		(fp_line
 			(start -0.107836 -0.36)
@@ -16914,7 +16914,7 @@
 		(property ki_fp_filters "C_*")
 		(path "/1d9c3592-ea42-4ef3-8c3a-0b77b2075314")
 		(sheetname "Root")
-		(sheetfile "optapi.kicad_sch")
+		(sheetfile "optopi.kicad_sch")
 		(attr smd)
 		(fp_line
 			(start -0.107836 0.36)
@@ -17153,7 +17153,7 @@
 		(property ki_fp_filters "C_*")
 		(path "/e3f07fe8-9a68-45af-9163-cb15c1464372")
 		(sheetname "Root")
-		(sheetfile "optapi.kicad_sch")
+		(sheetfile "optopi.kicad_sch")
 		(attr smd)
 		(fp_line
 			(start -0.107836 0.36)
@@ -17392,7 +17392,7 @@
 		(property ki_fp_filters "C_*")
 		(path "/b1657223-b627-4c25-9150-1df917b42cd9")
 		(sheetname "Root")
-		(sheetfile "optapi.kicad_sch")
+		(sheetfile "optopi.kicad_sch")
 		(attr smd)
 		(fp_line
 			(start -0.107836 -0.36)
@@ -17631,7 +17631,7 @@
 		(property ki_fp_filters "C_*")
 		(path "/37260307-e565-4769-9923-921828479fca")
 		(sheetname "Root")
-		(sheetfile "optapi.kicad_sch")
+		(sheetfile "optopi.kicad_sch")
 		(attr smd)
 		(fp_line
 			(start -0.107836 0.36)
@@ -17870,7 +17870,7 @@
 		(property ki_fp_filters "C_*")
 		(path "/510a53b4-09d0-4d1d-8818-b2685259c9e9")
 		(sheetname "Root")
-		(sheetfile "optapi.kicad_sch")
+		(sheetfile "optopi.kicad_sch")
 		(attr smd)
 		(fp_line
 			(start -0.107836 0.36)

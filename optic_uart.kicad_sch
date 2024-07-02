@@ -888,7 +888,7 @@
 			(uuid "06c9472a-f5bb-45fb-a8f3-66f3b5cd34d3")
 		)
 		(instances
-			(project "optapi"
+			(project "optopi"
 				(path "/cb1328be-544a-4c60-8dcb-9d63db56fc1e/3828f233-e3a1-487e-aef3-a50483b5f068"
 					(reference "JR1_OU1")
 					(unit 1)
@@ -990,7 +990,7 @@
 			(uuid "fa706fe3-8dbf-4cec-90f8-8fe91fb94cb4")
 		)
 		(instances
-			(project "optapi"
+			(project "optopi"
 				(path "/cb1328be-544a-4c60-8dcb-9d63db56fc1e/3828f233-e3a1-487e-aef3-a50483b5f068"
 					(reference "JT1_OU1")
 					(unit 1)
@@ -1108,7 +1108,7 @@
 			(uuid "72e50783-f081-42e0-b7e5-1619fc2d7118")
 		)
 		(instances
-			(project "optapi"
+			(project "optopi"
 				(path "/cb1328be-544a-4c60-8dcb-9d63db56fc1e/3828f233-e3a1-487e-aef3-a50483b5f068"
 					(reference "C1_OU1")
 					(unit 1)
@@ -1225,7 +1225,7 @@
 			(uuid "d073f458-9525-41ce-b33e-f760718bae4c")
 		)
 		(instances
-			(project "optapi"
+			(project "optopi"
 				(path "/cb1328be-544a-4c60-8dcb-9d63db56fc1e/3828f233-e3a1-487e-aef3-a50483b5f068"
 					(reference "C2_OU1")
 					(unit 1)
@@ -1341,7 +1341,7 @@
 			(uuid "559101fc-87ae-4003-a80f-60b0329f1918")
 		)
 		(instances
-			(project "optapi"
+			(project "optopi"
 				(path "/cb1328be-544a-4c60-8dcb-9d63db56fc1e/3828f233-e3a1-487e-aef3-a50483b5f068"
 					(reference "L1_OU1")
 					(unit 1)
