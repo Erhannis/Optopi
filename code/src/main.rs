@@ -9,7 +9,7 @@ use defmt::*;
 use defmt_rtt as _;
 use embedded_hal::digital::OutputPin;
 use panic_probe as _;
-use core::str;
+use core::{fmt::Write, str};
 
 // Provide an alias for our BSP so we can switch targets quickly.
 // Uncomment the BSP you included in Cargo.toml, the rest of the code does not need to change.
@@ -47,7 +47,7 @@ fn main() -> ! {
         gpio0.into_function(),
         gpio1.into_function(),
     );
-    let uart0 = UartPeripheral::new(peripherals.UART0, uart_pins_0, &mut peripherals.RESETS)
+    let mut uart0 = UartPeripheral::new(peripherals.UART0, uart_pins_0, &mut peripherals.RESETS)
         .enable(
             UartConfig::new(9600.Hz(), DataBits::Eight, None, StopBits::One),
             clocks.peripheral_clock.freq(),
@@ -60,30 +60,45 @@ fn main() -> ! {
         gpio4.into_function(),
         gpio5.into_function(),
     );
-    let uart1 = UartPeripheral::new(peripherals.UART1, uart_pins_1, &mut peripherals.RESETS)
+    let mut uart1 = UartPeripheral::new(peripherals.UART1, uart_pins_1, &mut peripherals.RESETS)
         .enable(
             UartConfig::new(9600.Hz(), DataBits::Eight, None, StopBits::One),
             clocks.peripheral_clock.freq(),
         ).unwrap();
         
-    
+    let mut i = 0;
     loop {
         info!("Loop");
-        uart0.write_full_blocking(b"Hello World 0!\r\n");
-        delay.delay_ms(100);
+        core::write!(uart0, "Hello World 0 {}!\r\n", i).unwrap();
+        core::write!(uart1, "Hello World 1 {}!\r\n", i).unwrap();
+        // uart0.write_full_blocking(b"Hello World 0!\r\n");
         let mut buf: [u8;256] = [0;256];
         while uart0.uart_is_readable() {
             match uart0.read_raw(&mut buf) {
                 Ok(count) => {
                     let b = &mut buf[0..count];
                     convert_to_lossy_utf8(b);
-                    info!("Read: {:?}", str::from_utf8(b).unwrap());
+                    info!("Read 0: {:?}", str::from_utf8(b).unwrap());
                 },
                 Err(e) => {
-                    info!("Read error");
+                    info!("Read 0 error");
                 },
             }
         }
+        while uart1.uart_is_readable() {
+            match uart1.read_raw(&mut buf) {
+                Ok(count) => {
+                    let b = &mut buf[0..count];
+                    convert_to_lossy_utf8(b);
+                    info!("Read 1: {:?}", str::from_utf8(b).unwrap());
+                },
+                Err(e) => {
+                    info!("Read 1 error");
+                },
+            }
+        }
+        delay.delay_ms(100);
+        i += 1;
     }
 }
 
