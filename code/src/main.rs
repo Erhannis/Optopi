@@ -110,4 +110,51 @@ fn convert_to_lossy_utf8(input: &mut [u8]) {
     }
 }
 
-// End of file
+
+
+
+
+
+
+
+use rp_pico::hal::pio::{PIOExt, SM0, SMConfig};
+use rp_pico::hal::clocks::ClocksManager;
+use rp_pico::hal::gpio::{FunctionPio0, PullUp};
+use rp_pico::pac::PIO0;
+use rp_pico::hal::pio::{PIOBuilder, StateMachine, PIO};
+
+use pio_proc::pio_file;
+pio_file!("./src/uart_rx.pio");
+
+const UART_RX_PIN: u8 = 0;
+const SERIAL_BAUD: u32 = 9600;
+
+fn uart_rx_program_init(
+    pio: &mut PIO<PIO0>,
+    sm: &mut StateMachine<PIO0, SM0>,
+    offset: u8,
+    pin: u8,
+    baud: u32,
+    clocks: &ClocksManager,
+) {
+    // Configure pin
+    let _pin = pio.gpio_init(pin).into_mode::<PullUp>();
+
+    // Create default config
+    let mut config = SMConfig::default();
+    
+    // Set up the pin
+    config.set_in_pins(pin);
+    config.set_jmp_pin(pin);
+    config.set_in_shift(false, true, 32); // shift right, autopush disabled
+    config.set_fifo_join_rx(); // Deeper FIFO
+
+    // Set clock divider
+    let clk_hz = clocks.system_clock.freq().to_Hz();
+    let div = (clk_hz as f32) / (8.0 * baud as f32);
+    config.clock_divider(div);
+
+    // Apply the config and start the state machine
+    sm.set_config(&config);
+    sm.set_enabled(true);
+}
