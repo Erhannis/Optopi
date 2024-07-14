@@ -3,7 +3,8 @@
 
 mod pio_run;
 
-use rp_pico::entry;
+use pio_run::uart_tx_putc;
+use rp_pico::{entry, pac::clocks};
 use defmt::*;
 use defmt_rtt as _;
 use panic_probe as _;
@@ -30,17 +31,31 @@ fn main() -> ! {
     let sio = Sio::new(peripherals.SIO);
     let pins = Pins::new(peripherals.IO_BANK0, peripherals.PADS_BANK0, sio.gpio_bank0, &mut peripherals.RESETS);
 
-    let (mut pio, sm0, _, _, _) = rp2040_hal::pio::PIOExt::split(peripherals.PIO0, &mut peripherals.RESETS);
-
-    pio_run::blink_program_init(
-      &mut pio,
-      sm0,
-      pins.gpio14.into_function(),
-    );
-
     let mut watchdog = Watchdog::new(peripherals.WATCHDOG);
     let mut clocks = init_clocks_and_plls(XOSC_CRYSTAL_FREQ, peripherals.XOSC, peripherals.CLOCKS, peripherals.PLL_SYS, peripherals.PLL_USB, &mut peripherals.RESETS, &mut watchdog).ok().unwrap();
     let core = pac::CorePeripherals::take().unwrap();
+
+    let baud = 9600;
+
+    let (mut pio0, sm00, _, _, _) = rp2040_hal::pio::PIOExt::split(peripherals.PIO0, &mut peripherals.RESETS);
+    let mut uart2_tx = pio_run::uart_tx_program_init(
+      &mut pio0,
+      sm00,
+      pins.gpio18.into_function(),
+      baud,
+      &clocks
+    );
+
+    let (mut pio1, sm10, _, _, _) = rp2040_hal::pio::PIOExt::split(peripherals.PIO1, &mut peripherals.RESETS);
+    let mut gpio19 = pins.gpio19;
+    gpio19.set_input_override(rp2040_hal::gpio::InputOverride::Invert);
+    let mut uart2_rx = pio_run::uart_rx_program_init(
+      &mut pio1,
+      sm10,
+      gpio19.into_function(),
+      baud,
+      &clocks
+    );
 
     let mut delay = cortex_m::delay::Delay::new(core.SYST, clocks.system_clock.freq().to_Hz());
 
@@ -53,7 +68,7 @@ fn main() -> ! {
     );
     let mut uart0 = UartPeripheral::new(peripherals.UART0, uart_pins_0, &mut peripherals.RESETS)
         .enable(
-            UartConfig::new(9600.Hz(), DataBits::Eight, None, StopBits::One),
+            UartConfig::new(baud.Hz(), DataBits::Eight, None, StopBits::One),
             clocks.peripheral_clock.freq(),
         ).unwrap();
 
@@ -66,7 +81,7 @@ fn main() -> ! {
     );
     let mut uart1 = UartPeripheral::new(peripherals.UART1, uart_pins_1, &mut peripherals.RESETS)
         .enable(
-            UartConfig::new(9600.Hz(), DataBits::Eight, None, StopBits::One),
+            UartConfig::new(baud.Hz(), DataBits::Eight, None, StopBits::One),
             clocks.peripheral_clock.freq(),
         ).unwrap();
         
@@ -75,6 +90,7 @@ fn main() -> ! {
         info!("Loop");
         core::write!(uart0, "Hello World 0 {}!\r\n", i).unwrap();
         core::write!(uart1, "Hello World 1 {}!\r\n", i).unwrap();
+        uart_tx_putc(&mut uart2_tx, b'x');
         // uart0.write_full_blocking(b"Hello World 0!\r\n");
         let mut buf: [u8;256] = [0;256];
         while uart0.uart_is_readable() {
@@ -100,6 +116,13 @@ fn main() -> ! {
                     info!("Read 1 error");
                 },
             }
+        }
+        loop {
+          //DUMMY Inefficient
+          match uart2_rx.read() {
+            Some(c) => {info!("Read 2: {:?}", (c >> 24) as u8 as char)},
+            None => {break;}
+          }
         }
         delay.delay_ms(100);
         i += 1;
