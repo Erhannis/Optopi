@@ -1,0 +1,21 @@
+Tx
+  PLT1 T9
+Rx
+  PLR3 T9
+    Inverted
+      11
+  PLR4 T9
+    Inverted
+      1
+    Glitching between inverted and non-inverted
+      1
+  YLR024
+    10 of them
+    Non-inverted, and noisy
+      11
+    holy cow, SO noisy
+      1
+    Inverted??? and noisy
+      1
+    Non-inverted, slight noise
+      1

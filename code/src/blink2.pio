@@ -1,0 +1,14 @@
+;
+; Copyright (c) 2020 Raspberry Pi (Trading) Ltd.
+;
+; SPDX-License-Identifier: BSD-3-Clause
+;
+
+; SET pin 0 should be mapped to your LED GPIO
+
+.program blink
+    set pindirs, 1
+.wrap_target
+    set pins, 1 [31]   ; Turn LED on
+    set pins, 0 [31]   ; Turn LED off
+.wrap
