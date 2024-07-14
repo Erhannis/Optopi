@@ -6,7 +6,6 @@ mod pio_run;
 use rp_pico::entry;
 use defmt::*;
 use defmt_rtt as _;
-use embedded_hal::digital::OutputPin;
 use panic_probe as _;
 use core::{fmt::Write, str};
 
