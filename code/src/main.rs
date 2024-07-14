@@ -1,10 +1,7 @@
-//! Blinks the LED on a Pico board
-//!
-//! This will blink an LED attached to GP25, which is the pin the Pico uses for the on-board LED.
 #![no_std]
 #![no_main]
 
-mod pio_example;
+mod pio_run;
 
 use rp_pico::entry;
 use defmt::*;
@@ -13,10 +10,7 @@ use embedded_hal::digital::OutputPin;
 use panic_probe as _;
 use core::{fmt::Write, str};
 
-// Provide an alias for our BSP so we can switch targets quickly.
-// Uncomment the BSP you included in Cargo.toml, the rest of the code does not need to change.
 use rp2040_hal::{self as bsp};
-// use sparkfun_pro_micro_rp2040 as bsp;
 
 use bsp::{
     clocks::{init_clocks_and_plls, Clock},
@@ -39,11 +33,7 @@ fn main() -> ! {
 
     let (mut pio, sm0, _, _, _) = rp2040_hal::pio::PIOExt::split(peripherals.PIO0, &mut peripherals.RESETS);
 
-    pins.gpio15.into_push_pull_output().set_low().unwrap();
-    pins.gpio16.into_push_pull_output().set_high().unwrap();
-    pins.gpio17.into_push_pull_output().set_low().unwrap();
-
-    pio_example::blink_program_init(
+    pio_run::blink_program_init(
       &mut pio,
       sm0,
       pins.gpio14.into_function(),
