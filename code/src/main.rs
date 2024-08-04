@@ -11,7 +11,7 @@ use defmt_rtt as _;
 use panic_probe as _;
 use core::{fmt::Write, str};
 
-use rp2040_hal::{self as bsp};
+use rp2040_hal::{self as bsp, gpio::DynBankId};
 
 use bsp::{
     clocks::{init_clocks_and_plls, Clock},
@@ -79,6 +79,7 @@ fn main() -> ! {
         ).unwrap();
 
     let mut gpio4 = pins.gpio4;
+    let gpio4_id = gpio4.id();
     let mut gpio5 = pins.gpio5;
     gpio4.set_output_override(rp2040_hal::gpio::OutputOverride::Invert);
     gpio5.set_input_override(rp2040_hal::gpio::InputOverride::Invert);
@@ -96,18 +97,58 @@ fn main() -> ! {
     loop {
         info!("Loop");
 
-        let (d, mut p) = uart1.free();
-        let mut g = p.0.into_push_pull_output();
-        g.set_low().unwrap();
-        delay.delay_us(5);
-        g.set_high().unwrap();
-        p.0 = g.into_function();
-        uart1 = UartPeripheral::new(d, p, &mut peripherals.RESETS)
-        .enable(
-            UartConfig::new(baud.Hz(), DataBits::Eight, None, StopBits::One),
-            clocks.peripheral_clock.freq(),
-        ).unwrap();
+        let num = gpio4_id.num; // gpio4.id(), back when you had access to it;
+        let mask = 1 << gpio4_id.num;
+        let bank = gpio4_id.bank;
 
+        // become push_pull
+        unsafe {
+          let sio = &*pac::SIO::PTR;
+          let gpio_oe_set = sio.gpio_oe_set();
+          match bank {
+              DynBankId::Bank0 => &gpio_oe_set,
+              DynBankId::Qspi => core::mem::transmute(&sio.gpio_hi_oe_set()),
+          }.write(|w| { w.gpio_oe_set().bits(mask) });
+        }
+        // next is: pin.pad_ctrl().modify(|_, w| w.ie().set_bit());
+        let gpio = unsafe { &*pac::PADS_BANK0::PTR };
+        gpio.gpio(usize::from(num)).modify(|_, w| w.ie().set_bit());
+        // next is: pin.io_ctrl().modify(|_, w| w.funcsel().variant(funcsel));
+        let gpio = unsafe { &*pac::IO_BANK0::PTR };
+        let io_ctrl = &gpio.gpio(usize::from(num)).gpio_ctrl();
+        io_ctrl.modify(|_, w| w.funcsel().variant(pac::io_bank0::gpio::gpio_ctrl::FUNCSEL_A::SIO));
+  
+        // set_low
+        unsafe {
+          let sio = &*pac::SIO::PTR;
+          let gpio_out_clr = sio.gpio_out_clr();
+          match bank {
+              DynBankId::Bank0 => &gpio_out_clr,
+              DynBankId::Qspi => core::mem::transmute(&sio.gpio_hi_out_clr()),
+          }.write(|w| { w.gpio_out_clr().bits(mask) });
+        }
+
+        delay.delay_us(3); // 2 or 3 seem to work - 2 shows no extra spike, 3 shows one ~100ns wide
+
+        // set_high
+        unsafe {
+          let sio = &*pac::SIO::PTR;
+          let gpio_out_set = sio.gpio_out_set();
+          match bank {
+              DynBankId::Bank0 => &gpio_out_set,
+              DynBankId::Qspi => core::mem::transmute(&sio.gpio_hi_out_set()),
+          }.write(|w| { w.gpio_out_set().bits(mask) });
+        }
+
+        // become uart
+        // next is: pin.pad_ctrl().modify(|_, w| w.ie().set_bit());
+        let gpio = unsafe { &*pac::PADS_BANK0::PTR };
+        gpio.gpio(usize::from(num)).modify(|_, w| w.ie().set_bit());
+        // next is: pin.io_ctrl().modify(|_, w| w.funcsel().variant(funcsel));
+        let gpio = unsafe { &*pac::IO_BANK0::PTR };
+        let io_ctrl = &gpio.gpio(usize::from(num)).gpio_ctrl();
+        io_ctrl.modify(|_, w| w.funcsel().variant(pac::io_bank0::gpio::gpio_ctrl::FUNCSEL_A::UART));
+        
         
         core::write!(uart0, "Hello World 0 {}!\r\n", i).unwrap();
         core::write!(uart1, "Hello World 1 {}!\r\n", i).unwrap();
