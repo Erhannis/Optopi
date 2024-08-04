@@ -3,6 +3,7 @@
 
 mod pio_run;
 
+use embedded_hal::digital::OutputPin;
 use pio_run::uart_tx_putc;
 use rp_pico::{entry, pac::clocks};
 use defmt::*;
@@ -35,8 +36,9 @@ fn main() -> ! {
     let mut clocks = init_clocks_and_plls(XOSC_CRYSTAL_FREQ, peripherals.XOSC, peripherals.CLOCKS, peripherals.PLL_SYS, peripherals.PLL_USB, &mut peripherals.RESETS, &mut watchdog).ok().unwrap();
     let core = pac::CorePeripherals::take().unwrap();
 
-    let baud = 9600;
+    // let baud = 9600;
     // let baud = 115200;
+    let baud = 921600;
 
     let (mut pio0, sm00, _, _, _) = rp2040_hal::pio::PIOExt::split(peripherals.PIO0, &mut peripherals.RESETS);
     let mut gpio18 = pins.gpio18;
@@ -93,10 +95,27 @@ fn main() -> ! {
     let mut i = 0;
     loop {
         info!("Loop");
+
+        let (d, mut p) = uart1.free();
+        let mut g = p.0.into_push_pull_output();
+        g.set_low().unwrap();
+        delay.delay_us(5);
+        g.set_high().unwrap();
+        p.0 = g.into_function();
+        uart1 = UartPeripheral::new(d, p, &mut peripherals.RESETS)
+        .enable(
+            UartConfig::new(baud.Hz(), DataBits::Eight, None, StopBits::One),
+            clocks.peripheral_clock.freq(),
+        ).unwrap();
+
+        
         core::write!(uart0, "Hello World 0 {}!\r\n", i).unwrap();
         core::write!(uart1, "Hello World 1 {}!\r\n", i).unwrap();
         uart_tx_putc(&mut uart2_tx, b'x');
         // uart0.write_full_blocking(b"Hello World 0!\r\n");
+
+        delay.delay_ms(100);
+
         let mut buf: [u8;256] = [0;256];
         while uart0.uart_is_readable() {
             match uart0.read_raw(&mut buf) {
@@ -129,7 +148,6 @@ fn main() -> ! {
             None => {break;}
           }
         }
-        delay.delay_ms(100);
         i += 1;
     }
 }
