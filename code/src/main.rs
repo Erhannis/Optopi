@@ -36,19 +36,22 @@ fn main() -> ! {
     let core = pac::CorePeripherals::take().unwrap();
 
     let baud = 9600;
+    // let baud = 115200;
 
     let (mut pio0, sm00, _, _, _) = rp2040_hal::pio::PIOExt::split(peripherals.PIO0, &mut peripherals.RESETS);
+    let mut gpio18 = pins.gpio18;
+    gpio18.set_output_override(rp2040_hal::gpio::OutputOverride::Invert);
     let mut uart2_tx = pio_run::uart_tx_program_init(
       &mut pio0,
       sm00,
-      pins.gpio18.into_function(),
+      gpio18.into_function(),
       baud,
       &clocks
     );
 
     let (mut pio1, sm10, _, _, _) = rp2040_hal::pio::PIOExt::split(peripherals.PIO1, &mut peripherals.RESETS);
     let mut gpio19 = pins.gpio19;
-    gpio19.set_input_override(rp2040_hal::gpio::InputOverride::Invert);
+    // gpio19.set_input_override(rp2040_hal::gpio::InputOverride::Invert);
     let mut uart2_rx = pio_run::uart_rx_program_init(
       &mut pio1,
       sm10,
@@ -59,9 +62,10 @@ fn main() -> ! {
 
     let mut delay = cortex_m::delay::Delay::new(core.SYST, clocks.system_clock.freq().to_Hz());
 
-    let gpio0 = pins.gpio0;
+    let mut gpio0 = pins.gpio0;
     let mut gpio1 = pins.gpio1;
-    gpio1.set_input_override(rp2040_hal::gpio::InputOverride::Invert);
+    gpio0.set_output_override(rp2040_hal::gpio::OutputOverride::Invert);
+    // gpio1.set_input_override(rp2040_hal::gpio::InputOverride::Invert);
     let uart_pins_0 = (
         gpio0.into_function(),
         gpio1.into_function(),
@@ -72,8 +76,9 @@ fn main() -> ! {
             clocks.peripheral_clock.freq(),
         ).unwrap();
 
-    let gpio4 = pins.gpio4;
+    let mut gpio4 = pins.gpio4;
     let mut gpio5 = pins.gpio5;
+    gpio4.set_output_override(rp2040_hal::gpio::OutputOverride::Invert);
     gpio5.set_input_override(rp2040_hal::gpio::InputOverride::Invert);
     let uart_pins_1 = (
         gpio4.into_function(),
