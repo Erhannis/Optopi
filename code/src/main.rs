@@ -44,6 +44,7 @@ fn main() -> ! {
 
     let (mut pio0, sm00, _, _, _) = rp2040_hal::pio::PIOExt::split(peripherals.PIO0, &mut peripherals.RESETS);
     let mut gpio18 = pins.gpio18;
+    let uart2_tx_pin = gpio18.id();
     gpio18.set_output_override(rp2040_hal::gpio::OutputOverride::Invert);
     let mut uart2_tx = pio_run::uart_tx_program_init(
       &mut pio0,
@@ -67,6 +68,7 @@ fn main() -> ! {
     let mut delay = cortex_m::delay::Delay::new(core.SYST, clocks.system_clock.freq().to_Hz());
 
     let mut gpio0 = pins.gpio0;
+    let uart0_tx_pin = gpio0.id();
     let mut gpio1 = pins.gpio1;
     gpio0.set_output_override(rp2040_hal::gpio::OutputOverride::Invert);
     // gpio1.set_input_override(rp2040_hal::gpio::InputOverride::Invert);
@@ -81,7 +83,7 @@ fn main() -> ! {
         ).unwrap();
 
     let mut gpio4 = pins.gpio4;
-    let gpio4_id = gpio4.id();
+    let uart1_tx_pin = gpio4.id();
     let mut gpio5 = pins.gpio5;
     gpio4.set_output_override(rp2040_hal::gpio::OutputOverride::Invert);
     gpio5.set_input_override(rp2040_hal::gpio::InputOverride::Invert);
@@ -99,10 +101,11 @@ fn main() -> ! {
     loop {
         info!("Loop");
 
-        toggle_uart_tx_pin(&gpio4_id, &mut delay);
-        
+        toggle_uart_tx_pin(&uart0_tx_pin, &mut delay);
         core::write!(uart0, "Hello World 0 {}!\r\n", i).unwrap();
+        toggle_uart_tx_pin(&uart1_tx_pin, &mut delay);
         core::write!(uart1, "Hello World 1 {}!\r\n", i).unwrap();
+        toggle_uart_tx_pin(&uart2_tx_pin, &mut delay);
         uart_tx_putc(&mut uart2_tx, b'x');
         // uart0.write_full_blocking(b"Hello World 0!\r\n");
 
